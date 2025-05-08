@@ -23,4 +23,34 @@ class database{
         return $connect;
     }
 }
+
+class query extends database{
+    // function for get data to the database 
+    public function getdata($table , $feild){
+        $sql = "SELECT $feild FROM $table";
+        $result = $this->connect()->query($sql);
+        return $result;
+    }
+
+    //function for insert data to the database table 
+      public function insertData($table, $param)
+    {
+        $fields = array();
+        $values = array();
+        foreach ($param as $key => $value) {
+            $fields[] = $key;
+            $values[] = $value;
+        }
+
+        $fields = implode(",", $fields);
+        $values = implode("','", $values);
+        $values = "'" . $values . "'";
+
+        $sql = "INSERT INTO $table ($fields) 
+            VALUES ($values)";
+
+        $result = $this->connect()->query($sql);
+        return $result;
+    }
+}
 ?>
