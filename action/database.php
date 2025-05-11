@@ -52,5 +52,20 @@ class query extends database{
         $result = $this->connect()->query($sql);
         return $result;
     }
+
+    // function for delete data from database table 
+    public function deletedata($table , $feild , $id){
+        $sql = "DELETE FROM $table WHERE $feild = $id ";
+        $result = $this->connect()->query($sql);
+        return $result;
+    }
+
+    # function for get a single data to the database table 
+    public function getdatabyid($table , $feild , $wherefeild , $id){
+        $sql = "SELECT $feild FROM $table WHERE $wherefeild = $id";
+        
+    }
+
+
 }
 ?>
