@@ -63,7 +63,31 @@ class query extends database{
     # function for get a single data to the database table 
     public function getdatabyid($table , $feild , $wherefeild , $id){
         $sql = "SELECT $feild FROM $table WHERE $wherefeild = $id";
-        
+        $result = $this->connect()->query($sql);
+        return $result;   
+    }
+
+    // function for updata a single row data to the database table 
+    public function updatedata($table , $param , $wherefeild , $id){
+        $sql = "UPDATE $table SET";
+
+        $length = count($param);
+        $i = 1;
+
+        foreach($param as $key => $value){
+            if($i == $length){
+                $sql .= "$key = '$value'";
+            }else{
+                $sql .= "$key = '$value' , " ;
+                $i++;
+            }
+        }
+
+        $sql .= "WHERE $wherefeild = $id";
+
+        $result = $this->connect()->query($sql);
+
+        return $result;
     }
 
 
